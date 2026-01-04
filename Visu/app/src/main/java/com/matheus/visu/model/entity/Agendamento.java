@@ -1,44 +1,42 @@
 package com.matheus.visu.model.entity;
+
 import com.matheus.visu.model.enums.StatusAgendamento;
-import java.sql.Time;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.UUID;
+
 public class Agendamento
 {
     private UUID id;
-    private Date data;
-    private Time horaInicio;
-    private Time horaFim;
+    private LocalDateTime dataHora;
     private StatusAgendamento status;
-    private Date criadoEM;
 
-    public UUID getId()
-    {  return id;  }
+    public void marcarComoAgendado(LocalDateTime dataHora)
+    {
+        validarAgendamento(dataHora);
+        this.dataHora = dataHora;
+        this.status = StatusAgendamento.AGENDADO;
+    }
 
-    public void setId(UUID id)
-    { this.id = id; }
+    private void validarAgendamento(LocalDateTime dataHora)
+    {
+        if (dataHora == null)
+        { throw new IllegalArgumentException("Data e hora do agendamento são obrigatórias"); }
 
-    public Date getData()
-    { return data; }
+        if (dataHora.isBefore(LocalDateTime.now()))
+        { throw new IllegalArgumentException("Não é possível agendar para uma data passada."); }
 
-    public void setData(Date data)
-    { this.data = data; }
+        if (this.status != null)
+        { throw new IllegalArgumentException("Agendamento já possui um status definido."); }
+    }
 
-    public Time getHoraInicio()
-    { return horaInicio; }
+    public void confirmarAgendamento(StatusAgendamento status)
+    {
+        validarConfirmacao(status);
+    }
 
-    public void setHoraInicio(Time horaInicio)
-    { this.horaInicio = horaInicio; }
+    private void validarConfimacao(StatusAgendamento status)
+    {
+        if ()
+    }
 
-    public Time getHoraFim()
-    { return horaFim; }
-
-    public void setHoraFim(Time horaFim)
-    { this.horaFim = horaFim; }
-
-    public Date getCriadoEM()
-    { return criadoEM; }
-
-    public void setCriadoEM(Date criadoEM)
-    { this.criadoEM = criadoEM; }
 }
