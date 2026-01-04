@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Visu">
         <activity
-            android:name=".MainActivity"
+            android:name="com.matheus.visu.ui.main.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
